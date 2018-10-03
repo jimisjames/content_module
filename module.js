@@ -22,6 +22,12 @@ module.exports = function (request, response){
             response.write(contents);
             response.end();
         });
+    } else if (/\/\S+.jpg/.test(request.url)) {
+        fs.readFile('images'+request.url, function (errors, contents) {
+            response.writeHead(200, {'Content-type': 'image/jpg'});
+            response.write(contents);
+            response.end();
+        });
     } else {
         response.end('File not found!!!');
     }
